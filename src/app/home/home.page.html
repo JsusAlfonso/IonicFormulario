@@ -1,0 +1,66 @@
+<ion-header translucent>
+    <ion-toolbar class="new-background-color" style="color:white;">
+        <ion-title slot="start">
+            Lista de contactos
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+
+    <div id="">
+        <ion-item>
+            <ion-label position="floating">Nombre completo: </ion-label>
+            <ion-input #name></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Telefono: </ion-label>
+            <ion-input #phone></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Correo: </ion-label>
+            <ion-input #email></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Notas: </ion-label>
+            <ion-input #notes></ion-input>
+        </ion-item>
+    </div>
+    <ion-button expand="full" (click)="addUser(name.value, phone.value, email.value, notes.value)">
+        <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-button>
+
+    <div *ngIf="arr.length !== 0">
+        <h4>Mis contactos</h4>
+
+        <ion-item>
+            <ion-label>Ver notas</ion-label>
+            <ion-toggle (click)="this.vista = !this.vista"></ion-toggle>
+        </ion-item>
+
+        <ion-card *ngFor="let item of arr;  let i = index">
+            <ion-card-header>
+                <ion-card-title>
+                    <ion-icon name="person-circle-outline"></ion-icon>{{item.name}}</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+                <ion-card-subtitle>
+                    <ion-icon name="mail-outline"></ion-icon> Correo: {{item.email}}</ion-card-subtitle>
+                <ion-card-subtitle>
+                    <ion-icon name="call-outline"></ion-icon> Telefono: {{item.phone}}</ion-card-subtitle>
+                <ion-card-subtitle *ngIf="vista">
+                    <ion-icon name="clipboard-outline"></ion-icon> Notas: {{item.notes}}</ion-card-subtitle>
+                <ion-button color="danger" (click)="alertConfirmation(item.name, i)" style="float: right;">x</ion-button>
+            </ion-card-content>
+        </ion-card>
+
+    </div>
+
+    <div *ngIf="arr.length === 0">
+        <h1 style="text-align: center;">No se han añadido contactos</h1>
+    </div>
+</ion-content>

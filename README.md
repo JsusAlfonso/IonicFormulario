@@ -1,0 +1,1 @@
+#instalar los paquetes con el comando npm i
